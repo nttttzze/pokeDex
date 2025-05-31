@@ -1,13 +1,14 @@
 import { useState, useEffect } from "react";
 
-const pokeUrl = "http://localhost:5010/api/pokemon";
-
 interface Poke {
   name: string;
   sprites: {
     front_default: string;
   };
 }
+
+const pokeUrl = "http://localhost:5010/api/pokemon";
+
 export default function GetPokemon() {
   const [p, setP] = useState<Poke | null>(null);
 

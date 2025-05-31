@@ -1,14 +1,30 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 
 function Search() {
   const [input, setInput] = useState("");
 
-  const fetchData = (value: string) => {
-    fetch(`http://localhost:5010/api/pokemon/${value}`)
-      .then((response) => response.json())
-      .then((json) => {
-        console.log("Pokemon: ", value, json);
-      });
+  // const fetchData = (value: string) => {
+  //   fetch(`http://localhost:5010/api/pokemon/${value}`)
+  //     .then((response) => response.json())
+  //     .then((json) => {
+  //       console.log("Pokemon: ", value, json);
+  //     });
+  // };
+
+  const navigate = useNavigate();
+  //  Ny kod, lättare att läsa + felhantering..
+  const fetchData = async (value: string) => {
+    const response = await fetch(`http://localhost:5010/api/pokemon/${value}`);
+    if (!response.ok) {
+      alert("Enter a valid Pokemon name."); //Lägg till en riktig popup framöver eller ngt
+      throw new Error("Enter a valid Pokemon name.");
+    }
+
+    const json = await response.json();
+    console.log("Pokemon: ", value, json);
+    navigate(`/PokemonInfoPage/${value}`);
   };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
