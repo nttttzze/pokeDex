@@ -1,0 +1,101 @@
+.navbar {
+    /* background-color: #2c3e50; Org färg*/
+    background-color: #34313A;
+    padding: 1rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    width: 50%;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    max-width: 100%;
+
+}
+
+* {
+    box-sizing: border-box;
+}
+
+.nav-links {
+    /* list-style: none; */
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin: 0;
+    padding: 0;
+}
+
+/* Buttons */
+#nav-btn {
+    appearance: none;
+    /* background-color: transparent; */
+    border: 2px solid #1A1A1A;
+    border-radius: 15px;
+    box-sizing: border-box;
+    color: #3B3B3B;
+    cursor: pointer;
+    display: inline-block;
+    font-family: Roobert, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    font-size: 16px;
+    font-weight: 600;
+    line-height: normal;
+    margin: 0;
+    margin-right: 26px;
+    min-height: 16px;
+    min-width: 0;
+    outline: none;
+    padding: 16px 24px;
+    text-align: center;
+    text-decoration: none;
+    transition: all 300ms cubic-bezier(.23, 1, 0.32, 1);
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    width: 100%;
+    will-change: transform;
+}
+
+
+#nav-btn:disabled {
+    pointer-events: none;
+}
+
+#nav-btn:hover {
+    color: #fff;
+    background-color: #1A1A1A;
+    box-shadow: rgba(0, 0, 0, 0.25) 0 8px 15px;
+    transform: translateY(-2px);
+}
+
+#nav-btn:active {
+    box-shadow: none;
+    transform: translateY(0);
+}
+
+@media(max-width: 900px) {
+    #nav-btn {
+        padding: 12px 20px;
+        font-size: 14px;
+    }
+}
+
+@media(max-width: 768px) {
+    #nav-btn {
+        flex-direction: column;
+        width: 90%;
+    }
+
+    .navbar {
+        width: 100%;
+        flex-direction: column;
+        align-items: center;
+    }
+
+
+}
+
+body {
+    overflow-x: hidden;
+}

@@ -1,0 +1,14 @@
+.pag {
+    position: relative;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+
+}
+
+.page-link {
+    background-color: #ffffff;
+    border-color: black;
+    margin-top: 0.5rem;
+
+}

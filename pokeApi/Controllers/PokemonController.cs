@@ -36,4 +36,22 @@ public class PokemonController : ControllerBase
             throw new Exception(ex.Message);
         }
     }
+
+    [HttpGet()]
+    public async Task<ActionResult> GetAllPokemon()
+    {
+        try
+        {
+            var response = await _httpClient.GetAsync("https://pokeapi.co/api/v2/pokemon");
+            response.EnsureSuccessStatusCode();
+
+            string content = await response.Content.ReadAsStringAsync();
+            var json = JsonDocument.Parse(content);
+            return Ok(new { success = true, data = json });
+        }
+        catch (Exception ex)
+        {
+            throw new Exception(ex.Message);
+        }
+    }
 }

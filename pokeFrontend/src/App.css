@@ -1,9 +1,31 @@
+/* .main-back {
+    background-image: url(../public/assets/wp2528663-dark-type-pokemon-wallpapers.jpg);
+
+} */
+
+.main-content {
+    width: 50%;
+    height: 100%;
+    margin: 0 auto;
+    position: relative;
+
+    display: flex;
+    flex-direction: column;
+    /* align-items: center;
+    justify-content: center; */
+    /* background-color: rgb(118, 173, 173); Org färg */
+    background-color: #1F1B24;
+
+}
+
 .search-container {
     position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 80vh;
+    max-width: 100%;
+
 
 }
 
@@ -14,6 +36,9 @@
     padding-left: 35px;
     border: none;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
+
+
 }
 
 .search-icon {
@@ -30,5 +55,43 @@ h1 {
 }
 
 body {
-    background-color: #2a2f32;
+    /* background-color: #2a2f32; Org färg */
+    background-color: #121212;
+    background-image: url(../public/assets/wp2528663-dark-type-pokemon-wallpapers.jpg);
+    /* background-image: url(../public/assets/pxfuel.jpg); */
+
+
+    background-size: auto;
+
+
+
+}
+
+.small-card {
+    background-color: #ffffff;
+    margin-right: 2rem;
+    border-radius: 15px;
+    background-color: #c1e6e3;
+}
+
+.extra-info {
+    padding-left: 1rem;
+
+
+}
+
+.pokeDex {
+    justify-content: center;
+}
+
+h5 {
+    color: rgb(42, 42, 71);
+}
+
+@media (max-width: 768px) {
+    .main-content {
+        width: 100%;
+        height: 100%;
+        margin-bottom: auto;
+    }
 }

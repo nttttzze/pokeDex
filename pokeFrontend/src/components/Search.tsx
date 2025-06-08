@@ -1,17 +1,9 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-// import { useNavigate } from "react-router-dom";
+import "../App.css";
 
 function Search() {
   const [input, setInput] = useState("");
-
-  // const fetchData = (value: string) => {
-  //   fetch(`http://localhost:5010/api/pokemon/${value}`)
-  //     .then((response) => response.json())
-  //     .then((json) => {
-  //       console.log("Pokemon: ", value, json);
-  //     });
-  // };
 
   const navigate = useNavigate();
   //  Ny kod, lättare att läsa + felhantering..
