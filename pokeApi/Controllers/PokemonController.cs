@@ -38,11 +38,13 @@ public class PokemonController : ControllerBase
     }
 
     [HttpGet()]
-    public async Task<ActionResult> GetAllPokemon()
+    public async Task<ActionResult> GetAllPokemon([FromQuery] int limit = 12, [FromQuery] int offset = 0)
     {
         try
         {
-            var response = await _httpClient.GetAsync("https://pokeapi.co/api/v2/pokemon");
+            var pokeApiUrl = $"https://pokeapi.co/api/v2/pokemon/?limit={limit}&offset={offset}";
+
+            var response = await _httpClient.GetAsync(pokeApiUrl);
             response.EnsureSuccessStatusCode();
 
             string content = await response.Content.ReadAsStringAsync();
