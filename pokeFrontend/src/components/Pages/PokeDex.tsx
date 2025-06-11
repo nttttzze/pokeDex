@@ -2,6 +2,7 @@ import { useEffect, useState, useRef } from "react";
 import type { Poke } from "./PokemonInfoPage";
 import "../../App.css";
 import "../../pokeDexButton.css";
+import { Link } from "react-router-dom";
 
 function PokeDex() {
   const [pokemonList, setPokemonList] = useState<Poke[]>([]);
@@ -57,24 +58,29 @@ function PokeDex() {
         }}
       >
         {pokemonList.map((poke) => (
-          <div
-            key={poke.id}
-            style={{
-              width: "10rem",
-              border: "2px solid black",
-              background: "#c1e6e3",
-              borderRadius: "8px",
-              padding: "0.5rem",
-            }}
+          <Link
+            key={poke.name}
+            to={`/PokemonInfoPage/${poke.name}`}
+            style={{ textDecoration: "none", color: "inherit" }}
           >
-            <a href="">--Pokemon Info Page--</a>
-
-            <h6>#{poke.id}</h6>
-            <h4>{poke.name.charAt(0).toUpperCase() + poke.name.slice(1)}</h4>
-            <img src={poke.sprites.front_default} alt={poke.name} />
-          </div>
+            <div
+              key={poke.id}
+              style={{
+                width: "10rem",
+                border: "2px solid black",
+                background: "#c1e6e3",
+                borderRadius: "8px",
+                padding: "0.5rem",
+              }}
+            >
+              <h6>#{poke.id}</h6>
+              <h4>{poke.name.charAt(0).toUpperCase() + poke.name.slice(1)}</h4>
+              <img src={poke.sprites.front_default} alt={poke.name} />
+            </div>
+          </Link>
         ))}
       </div>
+
       <button id="loadButton" onClick={loadMore}>
         Load more Pokémon
       </button>

@@ -17,6 +17,7 @@ function App() {
             element={<PokemonInfoPage />}
           />
           <Route path="/PokeDex" element={<PokeDex />} />
+          <Route path="/pokemon/:name" element={<PokemonInfoPage />} />
           <Route path="/InfoPage" element={<InfoPage />} />
         </Route>
       </Routes>
