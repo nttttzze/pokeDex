@@ -64,9 +64,11 @@ function PokeDex() {
             style={{ textDecoration: "none", color: "inherit" }}
           >
             <div
+              className="pokeDexS"
               key={poke.id}
               style={{
-                width: "10rem",
+                width: "12rem",
+                height: "14rem",
                 border: "2px solid black",
                 background: "#c1e6e3",
                 borderRadius: "8px",
@@ -75,7 +77,7 @@ function PokeDex() {
             >
               <h6>#{poke.id}</h6>
               <h4>{poke.name.charAt(0).toUpperCase() + poke.name.slice(1)}</h4>
-              <img src={poke.sprites.front_default} alt={poke.name} />
+              <img src={poke!.sprites.front_default} alt={poke.name} />
             </div>
           </Link>
         ))}

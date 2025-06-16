@@ -16,6 +16,7 @@
     /* background-color: rgb(118, 173, 173); Org färg */
     background-color: #1F1B24;
 
+
 }
 
 .search-container {
@@ -68,20 +69,35 @@ body {
 }
 
 .small-card {
-    background-color: #ffffff;
+    /* background-color: #ffffff; */
     margin-right: 2rem;
     border-radius: 15px;
     background-color: #c1e6e3;
+}
+
+.small-card-weakness {
+    background-color: #c1e6e3;
+
 }
 
 .extra-info {
     padding-left: 1rem;
 
 
+
 }
 
 .pokeDex {
     justify-content: center;
+}
+
+.pokeDexS {
+    transition: .2s;
+
+}
+
+.pokeDexS:hover {
+    transform: scale(1.12);
 }
 
 h5 {

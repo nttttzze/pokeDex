@@ -28,7 +28,7 @@ function Search() {
     <>
       <div className="container">
         <div className="row justify-content-center">
-          <div className="col-md-6">
+          <div className="col-md-6" style={{ width: "100%" }}>
             <form onSubmit={handleSubmit}>
               <div className="search-container">
                 <input

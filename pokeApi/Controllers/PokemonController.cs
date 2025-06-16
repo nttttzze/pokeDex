@@ -21,15 +21,26 @@ public class PokemonController : ControllerBase
     {
         try
         {
-            // var response = await _httpClient.GetAsync($"pokemon/{name.ToLower()}");
-            var response = await _httpClient.GetAsync($"https://pokeapi.co/api/v2/pokemon/{name.ToLower()}");
-            response.EnsureSuccessStatusCode();
+            var pokeResponse = await _httpClient.GetAsync($"https://pokeapi.co/api/v2/pokemon/{name.ToLower()}");
+            pokeResponse.EnsureSuccessStatusCode();
+            var pokeContent = await pokeResponse.Content.ReadAsStringAsync();
+            var pokeJson = JsonDocument.Parse(pokeContent);
 
-            string content = await response.Content.ReadAsStringAsync();
-            var json = JsonDocument.Parse(content);
 
-            // return Content(content, "application/json");
-            return Ok(new { success = true, data = json });
+            var speciesResponse = await _httpClient.GetAsync($"https://pokeapi.co/api/v2/pokemon-species/{name.ToLower()}");
+            speciesResponse.EnsureSuccessStatusCode();
+            var speciesContent = await speciesResponse.Content.ReadAsStringAsync();
+            var speciesJson = JsonDocument.Parse(speciesContent);
+
+            return Ok(new
+            {
+                success = true,
+                data = new
+                {
+                    pokemon = pokeJson.RootElement,
+                    species = speciesJson.RootElement
+                }
+            });
         }
         catch (Exception ex)
         {
