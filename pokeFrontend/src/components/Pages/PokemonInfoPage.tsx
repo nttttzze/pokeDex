@@ -88,27 +88,42 @@ export function PokemonInfoPage() {
     <>
       <div
         className="d-flex justify-content-center mt-5 align-items-center"
-        style={{ minHeight: "70vh", background: "" }}
+        style={{ minHeight: "70vh" }}
       >
         <div
           className="small-card"
           style={{
             // position: "absolute",
             width: "18rem",
-            height: "17rem",
+            height: "18rem",
             margin: "1rem",
             marginTop: "-5.5rem",
           }}
         >
           <h4></h4>
-          <div className="extra-info">
-            <h5>
+          <div className="extra-info" style={{}}>
+            {/* <h5>
               Type:&nbsp;&nbsp;
               {capitalizeFirstLetter(pokemon!.types[0].type.name)}
-            </h5>
+            </h5> */}
+
             <h5>
+              Type:&nbsp;&nbsp;
+              {pokemon!.types
+                .map((t) => capitalizeFirstLetter(t.type.name))
+                .join(", ")}
+            </h5>
+
+            {/* <h5>
               Abilities:&nbsp;&nbsp;
               {capitalizeFirstLetter(pokemon!.abilities[0].ability.name)}
+            </h5> */}
+
+            <h5>
+              Abilities:&nbsp;&nbsp;
+              {pokemon!.abilities
+                .map((y) => capitalizeFirstLetter(y.ability.name))
+                .join(", ")}
             </h5>
 
             {pokemon.stats.map((s, i) => (
@@ -130,7 +145,7 @@ export function PokemonInfoPage() {
                 padding: ".8rem",
                 paddingLeft: "1rem",
                 marginLeft: "-1rem",
-                marginTop: "2rem",
+                marginTop: "2.2rem",
               }}
             >
               {species && (

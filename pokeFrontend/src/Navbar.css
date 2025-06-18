@@ -81,7 +81,7 @@
     }
 }
 
-@media(max-width: 768px) {
+@media(max-width: 784px) {
     #nav-btn {
         flex-direction: column;
         width: 90%;
