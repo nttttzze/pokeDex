@@ -1,5 +1,6 @@
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
+import AbilityPopup from "../Popup";
 import "../../App.css";
 
 function capitalizeFirstLetter(val: string) {
@@ -48,17 +49,47 @@ export interface FlavorTextEntry {
     url: string;
   };
 }
+
+export interface AbilityInfo {
+  effect_entries: {
+    effect: string;
+    language: {
+      name: string;
+    };
+  }[];
+}
+
 export interface SpeciesPoke {
   flavor_text_entries: FlavorTextEntry[];
 }
 
+const abilityUrl = "http://localhost:5010/api/ability";
 const pokeUrl = "http://localhost:5010/api/pokemon";
 
 export function PokemonInfoPage() {
   const { pokemonName } = useParams();
   const [pokemon, setPokemon] = useState<Poke | null>(null);
   const [species, setSpecies] = useState<SpeciesPoke | null>(null);
+  const [, setAbility] = useState<AbilityInfo | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [showPopup, setShowPopup] = useState(false);
+
+  async function handleAbilityClick() {
+    const abilityName = pokemon?.abilities[0].ability.name;
+
+    const aUrl = `${abilityUrl}/${abilityName}`;
+
+    try {
+      const response = await fetch(aUrl);
+      const data = await response.json();
+
+      setAbility(data);
+
+      setShowPopup(true);
+    } catch (error) {
+      console.log("error, kunde inte ladda ability");
+    }
+  }
 
   useEffect(() => {
     const fetchPokemon = async () => {
@@ -95,18 +126,13 @@ export function PokemonInfoPage() {
           style={{
             // position: "absolute",
             width: "18rem",
-            height: "18rem",
+            height: "18.5rem",
             margin: "1rem",
             marginTop: "-5.5rem",
           }}
         >
           <h4></h4>
           <div className="extra-info" style={{}}>
-            {/* <h5>
-              Type:&nbsp;&nbsp;
-              {capitalizeFirstLetter(pokemon!.types[0].type.name)}
-            </h5> */}
-
             <h5>
               Type:&nbsp;&nbsp;
               {pokemon!.types
@@ -120,10 +146,17 @@ export function PokemonInfoPage() {
             </h5> */}
 
             <h5>
-              Abilities:&nbsp;&nbsp;
-              {pokemon!.abilities
-                .map((y) => capitalizeFirstLetter(y.ability.name))
-                .join(", ")}
+              <button
+                className="abilityButton"
+                onClick={handleAbilityClick}
+                // onClick={() => setShowPopup(true)}
+              >
+                Abilities:&nbsp;&nbsp;
+                {pokemon!.abilities
+                  .map((y) => capitalizeFirstLetter(y.ability.name))
+                  .join(", ")}
+                {showPopup && <AbilityPopup />}
+              </button>
             </h5>
 
             {pokemon.stats.map((s, i) => (
