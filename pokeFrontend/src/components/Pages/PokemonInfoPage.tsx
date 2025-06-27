@@ -1,10 +1,9 @@
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
-// import AbilityPopup from "../Popup";
-import { X } from "lucide-react";
 import "../../App.css";
+import { AbilityDesc } from "../Popup";
 
-function capitalizeFirstLetter(val: string) {
+export function capitalizeFirstLetter(val: string) {
   return String(val).charAt(0).toUpperCase() + String(val).slice(1);
 }
 export interface Poke {
@@ -72,50 +71,6 @@ export function PokemonInfoPage() {
   const [pokemon, setPokemon] = useState<Poke | null>(null);
   const [species, setSpecies] = useState<SpeciesPoke | null>(null);
   const [error, setError] = useState<string | null>(null);
-  const [showPopup, setShowPopup] = useState(false);
-  const [ability, setAbility] = useState<AbilityInfo | null>(null);
-
-  async function handleAbilityClick() {
-    const abilityUrl = "http://localhost:5010/api/ability";
-    const abilityName = pokemon?.abilities[0].ability.name;
-
-    const aUrl = `${abilityUrl}/${abilityName}`;
-
-    try {
-      const response = await fetch(aUrl);
-      const data = await response.json();
-      console.log("Fetched ability data:", data);
-      setAbility(data.data);
-
-      setShowPopup(true);
-    } catch (error) {
-      console.log("error, kunde inte ladda ability");
-    }
-  }
-
-  function AbilityPopup({
-    ability,
-    onClose,
-  }: {
-    ability: AbilityInfo | null;
-    onClose: () => void;
-  }) {
-    return (
-      <div className="extra-info2">
-        <div>
-          <button onClick={onClose} className="abilityXButton">
-            <X />
-          </button>
-        </div>
-        <h5>
-          {/* Ability Description: <br /> */}
-          {ability?.effect_entries?.find(
-            (entry) => entry.language.name === "en"
-          )?.short_effect ?? "Ingen effekt hittades"}
-        </h5>
-      </div>
-    );
-  }
 
   useEffect(() => {
     const fetchPokemon = async () => {
@@ -166,19 +121,7 @@ export function PokemonInfoPage() {
                 .map((t) => capitalizeFirstLetter(t.type.name))
                 .join(", ")}
             </h5>
-
-            <h5>
-              <button className="abilityButton" onClick={handleAbilityClick}>
-                Abilities:&nbsp;&nbsp;
-                {capitalizeFirstLetter(pokemon!.abilities[0].ability.name)}
-              </button>
-              {showPopup && ability && (
-                <AbilityPopup
-                  ability={ability}
-                  onClose={() => setShowPopup(false)}
-                />
-              )}
-            </h5>
+            <AbilityDesc pokemon={pokemon} />
 
             {pokemon.stats.map((s, i) => (
               <h5 key={i}>
@@ -239,26 +182,6 @@ export function PokemonInfoPage() {
           </div>
         </div>
       </div>
-      {/* GÖR SENARE. *Kanske* */}
-      {/* <div className="d-flex justify-content-center align-items-center">
-        <div
-          className="small-card-weakness"
-          style={{
-            height: "10rem",
-            width: "30rem",
-            marginTop: "-15rem",
-            borderRadius: "15px",
-            padding: "1rem",
-            textAlign: "center",
-          }}
-        >
-          <h5>
-            Abilities:&nbsp;&nbsp;
-            {capitalizeFirstLetter(pokemon!.abilities[0].ability.name)}
-          </h5>
-          <h5>Weaknesses:&nbsp;&nbsp;</h5>
-        </div>
-      </div> */}
     </>
   );
 }
