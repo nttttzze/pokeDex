@@ -1,6 +1,7 @@
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
-import AbilityPopup from "../Popup";
+// import AbilityPopup from "../Popup";
+import { X } from "lucide-react";
 import "../../App.css";
 
 function capitalizeFirstLetter(val: string) {
@@ -53,6 +54,7 @@ export interface FlavorTextEntry {
 export interface AbilityInfo {
   effect_entries: {
     effect: string;
+    short_effect: string;
     language: {
       name: string;
     };
@@ -63,18 +65,18 @@ export interface SpeciesPoke {
   flavor_text_entries: FlavorTextEntry[];
 }
 
-const abilityUrl = "http://localhost:5010/api/ability";
 const pokeUrl = "http://localhost:5010/api/pokemon";
 
 export function PokemonInfoPage() {
   const { pokemonName } = useParams();
   const [pokemon, setPokemon] = useState<Poke | null>(null);
   const [species, setSpecies] = useState<SpeciesPoke | null>(null);
-  const [, setAbility] = useState<AbilityInfo | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [showPopup, setShowPopup] = useState(false);
+  const [ability, setAbility] = useState<AbilityInfo | null>(null);
 
   async function handleAbilityClick() {
+    const abilityUrl = "http://localhost:5010/api/ability";
     const abilityName = pokemon?.abilities[0].ability.name;
 
     const aUrl = `${abilityUrl}/${abilityName}`;
@@ -82,13 +84,37 @@ export function PokemonInfoPage() {
     try {
       const response = await fetch(aUrl);
       const data = await response.json();
-
-      setAbility(data);
+      console.log("Fetched ability data:", data);
+      setAbility(data.data);
 
       setShowPopup(true);
     } catch (error) {
       console.log("error, kunde inte ladda ability");
     }
+  }
+
+  function AbilityPopup({
+    ability,
+    onClose,
+  }: {
+    ability: AbilityInfo | null;
+    onClose: () => void;
+  }) {
+    return (
+      <div className="extra-info2">
+        <div>
+          <button onClick={onClose} className="abilityXButton">
+            <X />
+          </button>
+        </div>
+        <h5>
+          {/* Ability Description: <br /> */}
+          {ability?.effect_entries?.find(
+            (entry) => entry.language.name === "en"
+          )?.short_effect ?? "Ingen effekt hittades"}
+        </h5>
+      </div>
+    );
   }
 
   useEffect(() => {
@@ -126,7 +152,8 @@ export function PokemonInfoPage() {
           style={{
             // position: "absolute",
             width: "18rem",
-            height: "18.5rem",
+            // height: "18.5rem",
+            height: "16.9rem",
             margin: "1rem",
             marginTop: "-5.5rem",
           }}
@@ -140,23 +167,17 @@ export function PokemonInfoPage() {
                 .join(", ")}
             </h5>
 
-            {/* <h5>
-              Abilities:&nbsp;&nbsp;
-              {capitalizeFirstLetter(pokemon!.abilities[0].ability.name)}
-            </h5> */}
-
             <h5>
-              <button
-                className="abilityButton"
-                onClick={handleAbilityClick}
-                // onClick={() => setShowPopup(true)}
-              >
+              <button className="abilityButton" onClick={handleAbilityClick}>
                 Abilities:&nbsp;&nbsp;
-                {pokemon!.abilities
-                  .map((y) => capitalizeFirstLetter(y.ability.name))
-                  .join(", ")}
-                {showPopup && <AbilityPopup />}
+                {capitalizeFirstLetter(pokemon!.abilities[0].ability.name)}
               </button>
+              {showPopup && ability && (
+                <AbilityPopup
+                  ability={ability}
+                  onClose={() => setShowPopup(false)}
+                />
+              )}
             </h5>
 
             {pokemon.stats.map((s, i) => (
@@ -178,7 +199,7 @@ export function PokemonInfoPage() {
                 padding: ".8rem",
                 paddingLeft: "1rem",
                 marginLeft: "-1rem",
-                marginTop: "2.2rem",
+                marginTop: "2.2rem", //var 2.2
               }}
             >
               {species && (

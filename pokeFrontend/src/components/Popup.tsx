@@ -1,34 +1,28 @@
-import "../App.css";
-export interface AbilityInfo {
-  effect_entries: {
-    effect: string;
-    language: {
-      name: string;
-    };
-  }[];
-}
+// import "../App.css";
+// import { X } from "lucide-react";
+// export interface AbilityInfo {
+//   effect_entries: {
+//     effect: string;
+//     language: {
+//       name: string;
+//     };
+//   }[];
+// }
 
-function AbilityPopup() {
-  return (
-    <div
-      className="extra-info"
-      style={{
-        position: "absolute",
-        background: "black",
-        width: "18rem",
-        height: "18.5rem",
-        margin: "1rem",
-        marginTop: "-5.5rem",
-        zIndex: 5,
-        borderRadius: "13px",
-        padding: ".8rem",
-        paddingLeft: "1rem",
-        marginLeft: "-1rem",
-      }}
-    >
-      <h2>bög</h2>
-    </div>
-  );
-}
+// function AbilityPopup({ onClose }: { onClose: () => void }) {
+//   return (
+//     <div className="extra-info2">
+//       <div>
+//         <button onClick={onClose} className="abilityXButton">
+//           <X />
+//         </button>
+//       </div>
+//       <h4>
+//         Ability Description: jdfhsfdjh, sjduhbu duc sjduhbu duc ceuee hebdf
+//         sjdjsdceuee hebdf sjdjsd sajdnj.
+//       </h4>
+//     </div>
+//   );
+// }
 
-export default AbilityPopup;
+// export default AbilityPopup;

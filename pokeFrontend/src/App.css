@@ -53,6 +53,7 @@
 
 h1 {
     color: black;
+
 }
 
 body {
@@ -60,7 +61,6 @@ body {
     background-color: #121212;
     /* background-image: url(../public/assets/wp2528663-dark-type-pokemon-wallpapers.jpg); */
     /* background-image: url(../public/assets/pxfuel.jpg); */
-
 
     background-size: auto;
 
@@ -86,6 +86,27 @@ body {
 
 }
 
+.extra-info2 {
+    position: absolute;
+    background-color: #121212;
+    width: 18rem;
+    height: 16.9rem;
+    margin: 1rem;
+    margin-top: -4rem;
+    z-index: 5;
+    border-radius: 13px;
+    padding: .8rem;
+    padding-left: 1rem;
+    margin-left: -1rem;
+    align-content: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.extra-info2 h5 {
+    color: rgb(205, 199, 191);
+}
+
 .pokeDex {
     justify-content: center;
 }
@@ -101,6 +122,36 @@ body {
 
 h5 {
     color: rgb(42, 42, 71);
+}
+
+.abilityXButton {
+    background-color: transparent;
+    color: rgb(42, 42, 71);
+    border-width: 0;
+    font-family: inherit;
+    font-size: inherit;
+    font-style: inherit;
+    font-weight: inherit;
+    line-height: inherit;
+    padding: 0;
+    margin-right: 1rem;
+    margin-left: auto;
+    text-align: left;
+    margin-bottom: 1rem;
+}
+
+.abilityXButton:hover {
+    background-color: #000000;
+
+    font-family: inherit;
+    font-size: inherit;
+    font-style: inherit;
+    font-weight: inherit;
+    line-height: inherit;
+    transform: scale(1.01);
+
+    margin-right: 1rem;
+    margin-left: auto;
 }
 
 .abilityButton {
