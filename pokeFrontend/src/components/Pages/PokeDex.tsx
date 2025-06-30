@@ -1,12 +1,14 @@
 import { useEffect, useState, useRef } from "react";
-import type { Poke } from "./PokemonInfoPage";
+import { type Poke } from "./PokemonInfoPage";
 import "../../App.css";
 import "../../pokeDexButton.css";
 import { Link } from "react-router-dom";
+import { typeIcons } from "../TypeIcons";
+// import { capitalizeFirstLetter } from "./PokemonInfoPage";
 
 function PokeDex() {
   const [pokemonList, setPokemonList] = useState<Poke[]>([]);
-  const [pokemonPerPage] = useState(12);
+  const [pokemonPerPage] = useState(25);
   const [page, setPage] = useState(1);
 
   const hasFetched = useRef(false);
@@ -55,6 +57,7 @@ function PokeDex() {
           margin: "2rem",
           marginLeft: "2rem",
           marginRight: "2rem",
+          zIndex: "100",
         }}
       >
         {pokemonList.map((poke) => (
@@ -71,13 +74,32 @@ function PokeDex() {
                 height: "14rem",
                 border: "2px solid black",
                 background: "#c1e6e3",
-                borderRadius: "8px",
+                borderRadius: "10px",
                 padding: "0.5rem",
               }}
             >
               <h6>#{poke.id}</h6>
               <h4>{poke.name.charAt(0).toUpperCase() + poke.name.slice(1)}</h4>
               <img src={poke!.sprites.front_default} alt={poke.name} />
+              <div>
+                {/* <h6>
+                  {poke.types
+                    .map((t) => capitalizeFirstLetter(t.type.name))
+                    .join(", ")}
+                </h6> */}
+                {/* Testar */}
+                <div>
+                  {/* (t) används för att skapa en <img>-tagg för varje typ som Pokémonen har. */}
+                  {poke.types.map((t) => (
+                    <img
+                      key={t.type.name}
+                      src={typeIcons[t.type.name]}
+                      alt={`${t.type.name} type`}
+                      style={{ height: "15px", marginTop: "1.6rem" }}
+                    />
+                  ))}
+                </div>
+              </div>
             </div>
           </Link>
         ))}

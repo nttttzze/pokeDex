@@ -14,6 +14,7 @@ export interface Poke {
   types: {
     type: {
       name: string;
+      url: string;
     };
   }[];
   abilities: {
@@ -121,8 +122,8 @@ export function PokemonInfoPage() {
                 .map((t) => capitalizeFirstLetter(t.type.name))
                 .join(", ")}
             </h5>
-            <AbilityDesc pokemon={pokemon} />
 
+            <AbilityDesc pokemon={pokemon} />
             {pokemon.stats.map((s, i) => (
               <h5 key={i}>
                 {capitalizeFirstLetter(s.stat.name)}: {s.base_stat}

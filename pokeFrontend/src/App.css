@@ -4,7 +4,7 @@
 } */
 
 .main-content {
-    width: 50%;
+    width: 60%;
     height: 100%;
     margin: 0 auto;
     position: relative;
@@ -15,9 +15,10 @@
     justify-content: center; */
     /* background-color: rgb(118, 173, 173); Org färg */
     background-color: #1F1B24;
-
-
+    z-index: 1;
 }
+
+
 
 .search-container {
     position: relative;
